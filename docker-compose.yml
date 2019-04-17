@@ -1,0 +1,9 @@
+version: '3'
+services:
+  sw-dev:
+    build:
+    image: docker
+    container_name: docker
+    tty: true
+    volumes:
+      - ./:/var/www/sw
