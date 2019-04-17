@@ -1,7 +1,12 @@
 version: '3'
 services:
   sw-dev:
+    working_dir: /var/www/sw
     build: ./docker/php73-swoole/Dockerfile
     image: sw-dev
-    container_name: docker
-    tty: true
+    container_name: es
+    ports:
+      - 19501:9501
+    volumes:
+      - ./app:/var/www/sw
+    entrypoint: "php /var/www/sw/easyswoole start"
