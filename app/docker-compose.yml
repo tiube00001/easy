@@ -1,0 +1,8 @@
+version: '3'
+services:
+  sw-dev:
+    image: sw-dev
+    container_name: sw-dev
+    tty: true
+    volumes:
+      - ./:/var/www/sw
