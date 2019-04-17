@@ -1,9 +1,7 @@
 version: '3'
 services:
   sw-dev:
-    build:
-    image: docker
+    build: ./docker/php73-swoole/Dockerfile
+    image: sw-dev
     container_name: docker
     tty: true
-    volumes:
-      - ./:/var/www/sw
