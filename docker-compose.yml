@@ -2,7 +2,7 @@ version: '3'
 services:
   sw-dev:
     working_dir: /var/www/sw
-    build: ./docker/php73-swoole/Dockerfile
+    build: ./docker/php73-swoole/
     image: sw-dev
     container_name: es
     ports:
