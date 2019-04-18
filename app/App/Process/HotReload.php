@@ -36,8 +36,6 @@ class HotReload extends AbstractProcess
             Timer::tick(2000, function () {
                 $this->reloadByTimer();
             });
-
-            echo 'reload by timer tick' . PHP_EOL;
         }
     }
 
