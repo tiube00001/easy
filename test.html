@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WebSocket Echo Client</title>
+    <meta charset="utf-8">
+</head>
+<h2>Websocket Echo Client</h2>
+<script>
+    // Initialize WebSocket connection and event handlers
+    function setup() {
+        var ws = new WebSocket("ws://127.0.0.1:19501");
+        // Listen for the connection open event then call the sendMessage function
+        ws.onopen = function(e) {
+            console.log('connect success')
+        };
+        // Listen for the close connection event
+        ws.onclose = function(e) {
+            console.log('close');
+            ws.close();
+        };
+        // Listen for connection errors
+        ws.onerror = function(e) {
+            console.log('error')
+        };
+        // Listen for new messages arriving at the client
+        ws.onmessage = function(e) {
+            console.log(e.data)
+        }
+    }
+    setup();
+</script>
+</html>

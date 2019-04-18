@@ -18,7 +18,8 @@ return [
             'worker_num' => 8,
             'task_worker_num' => 8,
             'reload_async' => true,
-            'task_enable_coroutine' => true
+            'task_enable_coroutine' => true,
+            'open_websocket_protocol' => true
         ],
     ],
     'TEMP_DIR' => null,
