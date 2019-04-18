@@ -7,8 +7,7 @@
  */
 
 namespace EasySwoole\EasySwoole;
-
-
+use App\Process\HotReload;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -26,6 +25,8 @@ class EasySwooleEvent implements Event
     public static function mainServerCreate(EventRegister $register)
     {
         // TODO: Implement mainServerCreate() method.
+        ServerManager::getInstance()->getSwooleServer()
+            ->addProcess((new HotReload('reload-process', ['disableInotify' => true]))->getProcess());
     }
 
     public static function onRequest(Request $request, Response $response): bool
