@@ -14,7 +14,7 @@ class Index extends Controller
     function index()
     {
         // TODO: Implement index() method.
-        $this->response()->write('six');
+        $this->response()->write('three');
     }
 
 }
