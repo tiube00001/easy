@@ -40,11 +40,11 @@ class EasySwooleEvent implements Event
         $dispatch = new Dispatcher($conf);
 
         // 给server 注册相关事件 在 WebSocket 模式下  on message 事件必须注册 并且交给 Dispatcher 对象处理
-        $register->set(EventRegister::onMessage, function (\swoole_websocket_server $server, \swoole_websocket_frame $frame) use ($dispatch) {
+        $register->set(EventRegister::onMessage, function (\swoole_server $server, \swoole_websocket_frame $frame) use ($dispatch) {
             $dispatch->dispatch($server, $frame->data, $frame);
         });
-        $register->add();
 
+        //创建一个swoole_table存储所有的fd
         //自定义握手事件
         $websocketEvent = new WebSocketEvent();
         $register->set(EventRegister::onHandShake, function (\swoole_http_request $request, \swoole_http_response $response) use ($websocketEvent) {

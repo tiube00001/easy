@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .other {
+            float: right;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="msg-box" style="width: 600px; height: 400px; background: gray; overflow: scroll">
+
+</div>
+<div>
+    <input id="input-box" />
+    <br>
+    <button id="send">发送</button>
+</div>
+
+
+</body>
+<script src="js/jquery.js"></script>
+<script>
+    // 创建一个Socket实例
+    var socket = new WebSocket('ws://127.0.0.1:19501');
+
+    // 打开Socket
+    socket.onopen = function(event) {
+
+        alert('websocket connect success');
+        // 监听Socket的关闭
+        socket.onclose = function(event) {
+            console.log('Client notified socket has closed',event);
+            socket.close()
+        };
+        socket.onmessage = function (event) {
+            let msg = JSON.parse(event.data);
+            addOther(msg.text);
+        };
+
+        $('#send').click(function () {
+            let input = $('#input-box');
+            let msg = input.val();
+            if (msg.length === 0) {
+                alert('请输入消息再发送');
+                return;
+            }
+            let json = {
+                class: 'index',
+                action: 'index',
+                content: {
+                    text: msg
+                }
+            };
+            socket.send(JSON.stringify(json));
+            self(input.val());
+            input.val('');
+        });
+
+    };
+
+
+
+
+
+
+
+    function self(data) {
+        let self = $('<div>').text(data);
+        $('#msg-box').append(self);
+    }
+
+    function addOther(data) {
+        let other = $('<div>');
+        let msg = $('<div>').addClass('other').html(data);
+        let clear = $('<div>').attr('style', 'clear:both;');
+        other.append(msg);
+        other.append(clear);
+        $('#msg-box').append(other);
+    }
+</script>
+</html>
